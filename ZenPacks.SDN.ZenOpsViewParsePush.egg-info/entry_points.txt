@@ -1,0 +1,3 @@
+[zenoss.zenpacks]
+ZenPacks.SDN.ZenOpsViewParsePush = ZenPacks.SDN.ZenOpsViewParsePush
+
