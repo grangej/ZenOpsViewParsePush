@@ -11,6 +11,10 @@
 from zope.component import adapts
 from zope.interface import implements
 
+from Products.Zuul.interfaces import IInfo
+from Products.Zuul.infos.actions import ActionFieldProperty
+from Products.Zuul.infos import InfoBase
+
 from Products.Zuul.infos import ProxyProperty
 from Products.Zuul.infos.component import ComponentInfo
 from Products.Zuul.infos.template import RRDDataSourceInfo
@@ -19,6 +23,13 @@ from ZenPacks.NAMESPACE.PACKNAME.ExampleComponent import ExampleComponent
 from ZenPacks.NAMESPACE.PACKNAME.interfaces \
     import IExampleDataSourceInfo, IExampleComponentInfo
 
+
+from ZenPacks.SDN.ZenOpsViewParsePush.interfaces import IConfigurableZOPActionContentInfo
+
+class ConfigurableZOPActionContentInfo(InfoBase):
+    implements(IConfigurableZOPActionContentInfo)
+
+    zopPushKey = ActionFieldProperty(IConfigurableZOPActionContentInfo, 'zopPushKey')
 
 class ExampleDataSourceInfo(RRDDataSourceInfo):
     """
@@ -51,3 +62,5 @@ class ExampleComponentInfo(ComponentInfo):
 
     attributeOne = ProxyProperty("attributeOne")
     attributeTwo = ProxyProperty("attributeTwo")
+
+

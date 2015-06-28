@@ -29,7 +29,10 @@
         />
     -->
 
-
+    <adapter provides=".interfaces.IConfigurableZOPActionContentInfo"
+             for="Products.ZenModel.NotificationSubscription.NotificationSubscription"
+             factory=".info.ConfigurableZOPActionContentInfo"
+             />
     <!-- Event Plugins
 
     These are useful when you want to manipulate events in a more bullet-proof

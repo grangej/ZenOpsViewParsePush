@@ -1,6 +1,8 @@
 from Products.Zuul.form import schema
 from Products.Zuul.interfaces.component import IComponentInfo
 from Products.Zuul.interfaces.template import IRRDDataSourceInfo
+from Products.Zuul.interfaces import IInfo
+
 
 # ZuulMessageFactory is the translation layer. You will see strings intended to
 # been seen in the web interface wrapped in _t(). This is so that these strings
@@ -24,6 +26,13 @@ else:
     SingleLineText = schema.Text
     MultiLineText = schema.TextLine
 
+
+class IConfigurableZOPActionContentInfo(IInfo):
+    zopPushKey = schema.Text(
+        title = _t(u'Push Key'),
+        description = _t(u'A key used for filtering'),
+        default = _t(u'')
+    )
 
 class IExampleDataSourceInfo(IRRDDataSourceInfo):
     """

@@ -6,6 +6,8 @@ from Products.ZenModel.actions import _signalToContextDict, ActionExecutionExcep
 from Products.ZenModel.NotificationSubscription import NotificationEventContextWrapper
 from Products.Zuul.form.interfaces import IFormBuilder
 
+from ZenPacks.SDN.ZenOpsViewParsePush.interfaces import IConfigurableZOPActionContentInfo
+
 import urllib
 import urllib2
 import httplib
@@ -31,3 +33,4 @@ class sendZOP(IActionBase):
 
     id = 'sendZOP'
     name = 'Send Alert to Zen Ops View 2'
+    actionContentInfo = IConfigurableZOPActionContentInfo
