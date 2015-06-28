@@ -16,6 +16,15 @@ class IActionBase(object):
     def configure(self, options):
         self.options = options
 
+    def getInfo(self, notification):
+        return self.actionContentInfo(notification)
+
+    def generateJavascriptContent(self, notification):
+        content = self.getInfo(notification)
+        return IFormBuilder(content).render(fieldsets=False)
+
+    def getDefaultData(self, dmd):
+        return {}
 
 class sendZOP(IActionBase):
     implements(IAction)
