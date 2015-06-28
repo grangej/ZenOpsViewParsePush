@@ -34,3 +34,9 @@ class sendZOP(IActionBase):
     id = 'sendZOP'
     name = 'Send Alert to Zen Ops View 2'
     actionContentInfo = IConfigurableZOPActionContentInfo
+
+
+
+    def updateContent(self, content=None, data=None):
+        content['zopPushKey'] = data.get('zopPushKey')
+        
