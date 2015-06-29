@@ -1,5 +1,7 @@
 import models.zovpaccount
 import models.serialization
+import models.zovpserver
+
 from Products.ZenUtils.Ext import DirectRouter, DirectResponse
 
 import json
@@ -34,6 +36,9 @@ class ZOVPushRouter(DirectRouter):
 
     def update_zovp_account(self, zovPushKey=None , triggers=None):
 
+        if zovPushKey == None:
+            return DirectResponse.fail("Missing zovPushKey")
+
         dmdRoot = _dmdRoot(self.context)
         accounts = getattr(dmdRoot, 'zovp_accounts', [])
 
@@ -56,9 +61,13 @@ class ZOVPushRouter(DirectRouter):
             accounts[index] = this_account_details
 
         setattr(dmdRoot, 'zovp_accounts', accounts)
-        return DirectResponse.succeed()
+        return DirectResponse.succeed("Account updated")
 
     def remove_zovp_account(self, zovPushKey=None):
+
+
+        if zovPushKey == None:
+            return DirectResponse.fail("Missing zovPushKey")
 
         dmdRoot = _dmdRoot(self.context)
         accounts = getattr(dmdRoot, 'zovp_accounts', [])
@@ -78,8 +87,17 @@ class ZOVPushRouter(DirectRouter):
             setattr(dmdRoot, 'zovp_accounts', accounts)
             return DirectResponse.succeed()
         else:
-            return DirectResponse.fail()
+            return DirectResponse.fail("Account not found")
+
+    def update_zovp_server(self, zovpServerKey=None, zovpServerEndPointURL=None):
+
+        if zovpServerKey == None or zovpServerEndPointURL == None:
+            return DirectResponse.fail("Missing zovpServerKey or zovpServerEndPointURL")
 
 
+        zovp_server_details = models.zovpserver.ZOVPServer(zovpServerKey, zovpServerEndPointURL)
+        dmdRoot = _dmdRoot(self.context)
 
+        setattr(dmdRoot, 'zovp_server', zovp_server_details)
 
+        return DirectResponse.succeed("Server set or updated")

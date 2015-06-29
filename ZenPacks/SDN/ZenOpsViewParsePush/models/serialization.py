@@ -28,8 +28,9 @@ import json
 class JSONEncoder(json.JSONEncoder):
      def default(self, obj):
          import zovpaccount
+         import zovpserver
 
-         if not isinstance(obj, (zovpaccount.ZOVPAccount)):
+         if not isinstance(obj, (zovpaccount.ZOVPAccount, zovpserver.ZOVPServer)):
              return super(JSONEncoder, self).default(obj)
 
          return obj.__dict__
