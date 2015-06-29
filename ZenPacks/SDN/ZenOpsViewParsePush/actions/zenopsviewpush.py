@@ -39,4 +39,3 @@ class sendZOP(IActionBase):
 
     def updateContent(self, content=None, data=None):
         content['zopPushKey'] = data.get('zopPushKey')
-        
