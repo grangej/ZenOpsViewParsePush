@@ -58,7 +58,7 @@ class ZOVPushRouter(DirectRouter):
         setattr(dmdRoot, 'zovp_accounts', accounts)
         return DirectResponse.succeed()
 
-    def remove_zovp_account(self, zovPushKey):
+    def remove_zovp_account(self, zovPushKey=None):
 
         dmdRoot = _dmdRoot(self.context)
         accounts = getattr(dmdRoot, 'zovp_accounts', [])
