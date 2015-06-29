@@ -40,22 +40,46 @@ class ZOVPushRouter(DirectRouter):
         this_account_details = models.zovpaccount.ZOVPAccount(zovPushKey, triggers)
 
         index = 0
-        newAccount = True
+        newaccount = True
 
         for accountDetails in accounts:
             if accountDetails.zovPushKey == zovPushKey:
-                newAccount = False
+                newaccount = False
                 break
             else:
                 index += 1
 
 
-        if newAccount == True:
+        if newaccount == True:
             accounts.append(this_account_details)
         else:
             accounts[index] = this_account_details
 
         setattr(dmdRoot, 'zovp_accounts', accounts)
         return DirectResponse.succeed()
+
+    def remove_zovp_account(self, zovPushKey):
+
+        dmdRoot = _dmdRoot(self.context)
+        accounts = getattr(dmdRoot, 'zovp_accounts', [])
+
+        foundaccount = False
+
+        this_account_details = models.zovpaccount.ZOVPAccount("None", "None")
+
+        for accountDetails in accounts:
+            if accountDetails.zovPushKey == zovPushKey:
+                foundaccount = True
+                this_account_details = accountDetails
+                break
+
+        if foundaccount == True:
+            accounts.remove(this_account_details)
+            setattr(dmdRoot, 'zovp_accounts', accounts)
+            return DirectResponse.succeed()
+        else:
+            return DirectResponse.fail()
+
+
 
 
