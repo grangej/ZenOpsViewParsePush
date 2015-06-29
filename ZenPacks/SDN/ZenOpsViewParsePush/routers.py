@@ -32,7 +32,7 @@ class ZOVPushRouter(DirectRouter):
 
         return DirectResponse.fail()
 
-    def update_zovp_account(self, zovPushKey, triggers):
+    def update_zovp_account(self, zovPushKey=None , triggers=None):
 
         dmdRoot = _dmdRoot(self.context)
         accounts = getattr(dmdRoot, 'zovp_accounts', [])
