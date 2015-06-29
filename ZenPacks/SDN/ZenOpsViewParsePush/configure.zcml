@@ -10,11 +10,12 @@
         />
 
 
-    <!-- Includes: Browser Configuration -->
+    <adapter provides=".interfaces.IConfigurableZOPActionContentInfo"
+             for="Products.ZenModel.NotificationSubscription.NotificationSubscription"
+             factory=".info.ConfigurableZOPActionContentInfo"
+             />
+
     <include package=".browser"/>
-
-
-    <!-- Info Adapters: DataSources -->
 
     <include package="Products.ZenUtils.extdirect.zope" file="meta.zcml"/>
 
@@ -25,21 +26,7 @@
      namespace="Zenoss.remote"
      permission="zenoss.View"/>
 
-    <adapter provides=".interfaces.IConfigurableZOPActionContentInfo"
-             for="Products.ZenModel.NotificationSubscription.NotificationSubscription"
-             factory=".info.ConfigurableZOPActionContentInfo"
-             />
-    <!-- Event Plugins -->
 
-
-
-    <!-- Dynamic View Adapters -->
-
-
-    <!-- Impact Adapters -->
-
-
-    <!-- Analytics Adapters -->
 
 </configure>
 
